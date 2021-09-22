@@ -63,9 +63,11 @@ function createTable(table, columns, clubId) {
     const [keyJoined, indexJoined] = _.get(Object.entries(joined_at), '0', null)
     const [keyPhone, indexPhone] = _.get(Object.entries(phone), '0', null)
 
-    for (const row of table) {
+    for (const [index,row] of table.entries()) {
         const emailAddress = row[indexEmail]
+        console.log(index)
         csvStream.write({
+            'id': index+1,
             [keyFirstName]: row[indexFirstName],
             [keyLastName]: row[indexLastName],
             [keyPhone]: row[indexPhone],
@@ -120,11 +122,3 @@ async function parsExcel() {
 }
 parsExcel()
 
-
-// const club_id=  `2400`
-// const pathFile=  `jimalaya.xlsx
-// const first_name = 'first_name'
-// const last_name = 'last_name'
-// const phone = 'phone'
-// const email = 'email'
-// const joined_at = 'membershp_start_date'
